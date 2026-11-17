@@ -1,6 +1,6 @@
 # opencode-autosuggestions
 
-Copilot-style prompt autosuggestions for the [OpenCode](https://opencode.ai) TUI.
+Copilot-style prompt autosuggestions for [OpenCode](https://opencode.ai) and [Pi](https://pi.dev).
 
 ![opencode-autosuggestions demo: autocomplete while typing, then follow-up suggestions after each turn](https://raw.githubusercontent.com/fedeya/opencode-autosuggestions/main/assets/demo.gif)
 
@@ -21,7 +21,25 @@ permission request, or question is waiting for you.
 Suggestions follow your language and tone: they are written the way you write in the conversation, and completions
 continue whatever you are typing.
 
-## Install
+## Install in Pi
+
+Requires Pi 1.5.2 or newer (`@earendil-works/pi-coding-agent`). From this checkout:
+
+```sh
+bun install
+bun run build
+pi install "$PWD/packages/pi"
+```
+
+Try it for one run with `pi -e "$PWD/packages/pi"`. `pi-ai-autosuggestions` is not published on npm yet.
+
+Pi provides both inline completions and follow-ups, with the same accept and dismiss keys. It sends the draft
+and recent chat text to a model on your current provider using Pi's existing authentication. Use `/autosuggestions`
+to toggle it for the current run. It also works with previously loaded custom editors based on Pi's `CustomEditor`.
+If Pi asks for project trust, review the project settings before approving. The options,
+palette commands, and usage report below are OpenCode-only.
+
+## Install in OpenCode
 
 Built and tested with OpenCode 2.3. It is a TUI-only plugin, so add it to `~/.config/opencode/cli.json` (not
 `opencode.json`):
@@ -120,7 +138,8 @@ bun run check   # types, lint, and tests
 bun run build
 ```
 
-The code that depends on OpenCode internals is in `src/host.ts`; the rest is plain logic with tests in `test/`.
+The adapters are in `packages/opencode/` and `packages/pi/`. Shared prompts, model selection, and text parsing are in
+`packages/core/`. Run `npm pack` from either adapter directory to package it.
 
 ### Prompt evals
 
@@ -129,7 +148,7 @@ instead of guessed. It calls models through your local OpenCode service, so it u
 
 ```sh
 bun run eval before --samples 2   # save a run with the current prompts
-# change src/prompts.ts
+# change packages/core/src/prompts.ts
 bun run eval after --samples 2
 bun run eval:compare before after # summary, and every suggestion side by side
 ```
@@ -138,7 +157,7 @@ Results go to `eval/results/`, which is not committed.
 
 ### Releasing
 
-1. Bump `version` in `package.json` and add its section to `CHANGELOG.md`.
+1. Bump `version` in `packages/opencode/package.json` and add its section to `CHANGELOG.md`.
 2. Commit, then push a matching tag: `git tag v0.1.5 && git push origin v0.1.5`.
 
 The release workflow runs the checks, publishes to npm, and creates the GitHub release with the CHANGELOG section as
@@ -148,7 +167,7 @@ Point `cli.json` at your checkout to try it:
 
 ```json
 {
-  "plugins": ["/path/to/opencode-autosuggestions"]
+  "plugins": ["/path/to/opencode-autosuggestions/packages/opencode"]
 }
 ```
 

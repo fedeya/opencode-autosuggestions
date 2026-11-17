@@ -1,0 +1,10 @@
+{
+  "name": "@autosuggestions/core",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./models": "./src/models.ts",
+    "./prompts": "./src/prompts.ts",
+    "./text": "./src/text.ts"
+  }
+}

@@ -1,14 +1,3 @@
-import { Plugin } from "@opencode/plugin/tui"
-import { createSignal } from "solid-js"
-import {
-  createPlaceholderGuard,
-  cursorCell,
-  focusedPrompt,
-  isCursorAtEnd,
-  type PromptEditor,
-  setPromptText,
-} from "./host"
-import { createLog } from "./log"
 import {
   AUTO,
   attempts,
@@ -20,11 +9,22 @@ import {
   pickModels,
   refKey,
   sameModel,
-} from "./models"
+} from "@autosuggestions/core/models"
+import { completionPrompt, followUpPrompt } from "@autosuggestions/core/prompts"
+import { fitSuggestion, isCompletable, parseCompletion, parseFollowUp, splitNextWord } from "@autosuggestions/core/text"
+import { Plugin } from "@opencode/plugin/tui"
+import { createSignal } from "solid-js"
+import {
+  createPlaceholderGuard,
+  cursorCell,
+  focusedPrompt,
+  isCursorAtEnd,
+  type PromptEditor,
+  setPromptText,
+} from "./host"
+import { createLog } from "./log"
 import { resolveOptions } from "./options"
 import { createOverlay } from "./overlay"
-import { completionPrompt, followUpPrompt } from "./prompts"
-import { fitSuggestion, isCompletable, parseCompletion, parseFollowUp, splitNextWord } from "./text"
 import { formatTranscript, lastAssistantModel } from "./transcript"
 import { endedCleanly } from "./turn"
 import { localDate, recordCall, type SuggestionKind, type UsageLog, usageReport } from "./usage"

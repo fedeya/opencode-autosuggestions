@@ -2,7 +2,7 @@
 // are estimated from text length and priced with the model's list price. Subscriptions have no price: only calls and
 // tokens are counted for them.
 
-import type { ModelOption, ModelRef } from "./models"
+import type { ModelOption, ModelRef } from "@autosuggestions/core/models"
 
 export const CHARS_PER_TOKEN = 4
 const KEEP_DAYS = 90

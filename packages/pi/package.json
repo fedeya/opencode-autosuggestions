@@ -1,0 +1,32 @@
+{
+  "name": "pi-ai-autosuggestions",
+  "version": "0.1.0",
+  "description": "Copilot-style prompt autosuggestions for the Pi terminal UI",
+  "license": "MIT",
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "pi-package"
+  ],
+  "pi": {
+    "extensions": [
+      "./dist/index.js"
+    ]
+  },
+  "scripts": {
+    "build": "bun build src/index.ts --target=node --format=esm --outdir=dist --external='@earendil-works/*'",
+    "prepack": "bun run build && cp ../../README.md ../../LICENSE ."
+  },
+  "devDependencies": {
+    "@autosuggestions/core": "workspace:*",
+    "@earendil-works/pi-ai": "1.5.2",
+    "@earendil-works/pi-coding-agent": "1.5.2",
+    "@earendil-works/pi-tui": "1.5.2"
+  },
+  "peerDependencies": {
+    "@earendil-works/pi-coding-agent": "*",
+    "@earendil-works/pi-tui": "*"
+  }
+}

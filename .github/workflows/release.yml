@@ -28,9 +28,11 @@ jobs:
       - run: bun run check
 
       - name: Check the tag matches package.json
+        working-directory: packages/opencode
         run: test "v$(node -p 'require("./package.json").version')" = "$GITHUB_REF_NAME"
 
       - name: Publish to npm
+        working-directory: packages/opencode
         run: |
           name=$(node -p 'require("./package.json").name')
           if npm view "$name@${GITHUB_REF_NAME#v}" version > /dev/null 2>&1; then

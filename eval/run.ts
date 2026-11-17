@@ -6,12 +6,12 @@
 
 import { mkdirSync, writeFileSync } from "node:fs"
 import { join } from "node:path"
+import { type ModelRef, parseModelRef } from "@autosuggestions/core/models"
+import { completionPrompt, followUpPrompt } from "@autosuggestions/core/prompts"
+import { parseCompletion, parseFollowUp } from "@autosuggestions/core/text"
 import { OpenCode } from "@opencode/client"
 import { Service } from "@opencode/client/service"
-import { type ModelRef, parseModelRef } from "../src/models"
-import { completionPrompt, followUpPrompt } from "../src/prompts"
-import { parseCompletion, parseFollowUp } from "../src/text"
-import { formatTranscript } from "../src/transcript"
+import { formatTranscript } from "../packages/opencode/src/transcript"
 import { type CompletionCase, completionCases, type FollowUpCase, followUpCases } from "./cases"
 import { detectLanguage, type Result } from "./shared"
 

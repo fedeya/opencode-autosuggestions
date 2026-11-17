@@ -1,37 +1,13 @@
 {
   "$schema": "https://json.schemastore.org/package.json",
-  "name": "opencode-autosuggestions",
-  "version": "0.1.7",
-  "description": "Copilot-style prompt autosuggestions for the OpenCode TUI: the likely next prompt after each turn, and completions while you type",
-  "keywords": [
-    "opencode",
-    "opencode-plugin",
-    "autosuggestions",
-    "autocomplete",
-    "tui"
-  ],
-  "author": "Federico Minaya <hello@fedeminaya.com>",
-  "license": "MIT",
-  "homepage": "https://github.com/fedeya/opencode-autosuggestions#readme",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/fedeya/opencode-autosuggestions.git"
-  },
-  "bugs": {
-    "url": "https://github.com/fedeya/opencode-autosuggestions/issues"
-  },
+  "name": "autosuggestions-monorepo",
+  "private": true,
   "type": "module",
-  "exports": {
-    "./tui": "./dist/tui.js"
-  },
-  "files": [
-    "dist",
-    "README.md",
-    "LICENSE"
+  "workspaces": [
+    "packages/*"
   ],
   "scripts": {
-    "build": "bun scripts/build.ts",
-    "prepack": "bun run build",
+    "build": "bun run --workspaces --if-present build",
     "typecheck": "tsc --noEmit",
     "test": "bun test",
     "lint": "biome check .",
@@ -40,21 +16,11 @@
     "eval": "bun eval/run.ts",
     "eval:compare": "bun eval/compare.ts"
   },
-  "dependencies": {
-    "@opencode/plugin": "^2.3.0"
-  },
-  "peerDependencies": {
-    "@opentui/core": ">=0.6.6",
-    "@opentui/solid": ">=0.6.6",
-    "solid-js": ">=1.9.0"
-  },
   "devDependencies": {
+    "@autosuggestions/core": "workspace:*",
     "@biomejs/biome": "^2.6.8",
     "@opencode/client": "^2.3.0",
-    "@opentui/core": "^0.9.2",
-    "@opentui/solid": "^0.9.2",
     "@types/bun": "^1.4.4",
-    "solid-js": "^1.9.19",
     "typescript": "^5.9.0"
   }
 }

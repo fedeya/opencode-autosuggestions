@@ -10,8 +10,7 @@ const result = await Bun.build({
   outdir: "./dist",
   target: "bun",
   format: "esm",
-  packages: "external",
-  external: ["opentui:*"],
+  external: [...shared, "opentui:*"],
   plugins: [
     createSolidTransformPlugin({
       moduleName: runtimeModuleIdForSpecifier("@opentui/solid"),

@@ -1,6 +1,6 @@
+import type { ModelRef } from "@autosuggestions/core/models"
+import { clip, clipEnd } from "@autosuggestions/core/text"
 import type { SessionMessageInfo } from "@opencode/client"
-import type { ModelRef } from "./models"
-import { clip, clipEnd } from "./text"
 
 const MAX_USER_MESSAGE_CHARS = 1200
 const MAX_ASSISTANT_MESSAGE_CHARS = 2000
